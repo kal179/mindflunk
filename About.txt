@@ -1,0 +1,27 @@
+
+
+Brainfuck interpreter
+(1) Direct Interpreter
+(2) Bytecode Interpreter
+
+
+Brainfuck
+(1) Direct Interpreter
+
+Implementation of brainfuck in direct interpretation method,
+In which scripts are executed in their native language, and
+not converted to any intermediate representation!
+For e.g. Lisp, Scheme, etc!
+
+
+Brainfuck
+(2) Bytecode Interpreter
+
+Implementation of brainfuck in which scripts are converted
+to an intermediate language-representation and then executed
+by dedicated VM(Virtual Machine)!
+
+
+I'm implementating interpreter of language Brainfuck
+in two distinct ways, for learning purposes!
+And also b'cuz Brainfuck is easy to implement!
