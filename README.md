@@ -20,6 +20,13 @@ by dedicated VM(Virtual Machine)!     <br/>
 in two distinct ways, for learning purposes!    <br/>
 And also b'cuz Brainfuck is easy to implement!     </i><br/>
 <br/>
+<strong>Usage:</strong> <br/>
+<pre>
+    ~$ python first-hand-interpretation/brainfuck.py source.bf
+    ~$ python middle-man-interpretation/brainfuck.py source.bf
+    
+</pre>
+
 I'd Love to hear <b>edits, suggestions, and your   <br/>
 contribution</b>.  <br/>
 contact: kalpaktake@gmail.com
