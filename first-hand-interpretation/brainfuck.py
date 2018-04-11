@@ -1,121 +1,139 @@
 
 
 
-# Brainfuck Interpreter
+# This is a big change
+# if you saw last version of this code!
+#  -- shift from oop to functions
 
-# Intro:
-# Brainfuck has 8 instructions, which are 
-# turing complete which basically means that 
-# they can read-write-manipulate Long array(tape) 
-# of memory according to instructions
-# PLUS PLUS bf interpreter does not have any 
-# statements, clearly it's a plain turing language.
- 
-# References:
-# Check out:
-#    ||
-#   _||_
-#   \  /
-#    \/
-#  http://www.muppetlabs.com/~breadbox/bf/
-#  https://en.wikipedia.org/wiki/Brainfuck
+# But this code looks much better and 
+# works alike
 
-# Lil Extra:
-# The interpreter uses direct instruction 
-# interpretation to execute the instructions
-# The memory consists of 30,000 memory cells
-# each cell can store upto 1byte of memory
+# See: Readme.txt file 
+# for introduction, info!
 
 
 import sys
 
 
-class BrainScrew:
-	def __init__(self, fname):
-		# Read instructions from bf source file
-		self.instructions = str(open(fname, "r").read())
-		# Memory cells to store guess what "data"
-		self.memory = [0]*30000		
-		# memory cell pointer
-		self.cell_ptr = 0
+def cleansing_agent(_collection, lookup):
+	# To clean file of non-instruction characters
+	return [instr for instr in _collection if instr in lookup]
 
 
-	def run_fck(self):
-		# instruction counter
-		i = 0
-
-		while i < len(self.instructions):
-			# Check each individual possibility of instructions
-			# that can occur in bf and execute 'em accordingly
-			
-			if self.instructions[i] == ">":
-				# Move ptr to next memory cell 
-				if self.cell_ptr+1 <= 30000:
-					self.cell_ptr += 1
-				else:
-					# Memory pointer overflow
-					print("Traceback Error: \n  >Looks like you want to store \n   memory at locations that do not exist, \n   You only have 30000 memory cells!")
-					sys.exit(1)
-
-			elif self.instructions[i] == "<":
-				# Move ptr to next memory cell 
-				if self.cell_ptr-1 >= 0:
-					self.cell_ptr -= 1
-				else:
-					# Memory pointer underflow
-					print("Traceback Error: \n  > Seriously, \n   No support for negative memory location/indexing")
-					sys.exit(1)
-
-			elif self.instructions[i] == "+":
-				# Increment byte at current memory location
-				if self.memory[self.cell_ptr]+1 <= 255:
-					self.memory[self.cell_ptr] += 1
-				else:
-					# Memory overflow error
-					print("Traceback Error: \n  > I guess 1 byte(2**8 bits) can store only upto signed -127 to 127 and unsigned 0 to 255 still i gave ya'll \n   signed option of -255 to 255, but looks like you exceeded that as well, \n   Suggestion move to next memory cell!")
-					sys.exit(0)
-
-			elif self.instructions[i] == "-":
-				# Decrement byte at current memory location
-				if self.memory[self.cell_ptr]-1 > -256:
-					self.memory[self.cell_ptr] -= 1
-				else:
-					# Memory underflow error
-					print("Traceback Error: \n  > I guess 1 byte(2**8) can store only upto signed -127 to 127 and signed 255 still i gave ya'll \n  signed option of -255 to 255, but looks like you exceeded that as well, \n  Suggestion move to next memory cell!")
-					sys.exit(1)
-
-			elif self.instructions[i] == ".":
-				# Print byte at current memory cell
-				print(chr(self.memory[self.cell_ptr]))
-
-			elif self.instructions[i] == ",":
-				# Input val and store it in current memory cell
-				temp =  int(input())
-				if not(temp > 255 or temp < -255):
-					self.memory[self.cell_ptr] = temp
-				else:
-					# Memory error
-					print("Traceback Error: \n  > C'mon 1 byte cannot store values greater than 255 and smaller than -255 \nin my BrainFuck Machine!!")
-					sys.exit(1)
+def files_got_content(fname):
+	
+	# To execute instructions, first we need to
+	# read 'em from source file
+	f_contents = open(fname, "r")
+	temp = f_contents.read()
+	f_contents.close()
+	return temp
 
 
-			# WORKING ON '[', ']' INSTRUCTIONS
-			# TRYING TO IMPLEMENT 'EM using STACK
-			# TO STORE THE LOOPS LOCATION 
+def build_index_map(_ops, _init, _end):
+	
+	# To build a map with locations
+	# of loops i.e. key-value pairs of start index
+	# and end index of loops
+	index_map = {}
 
+	# Top most-value of list(stack) will be location of latest 
+	# start index encountered by for-loop, necessary for correct
+	# matching of indexes
+	cache = []
+
+	for i in range(0, len(_ops)):
+		# put encountered start indexes of loops in cache stack
+		if _ops[i] == _init:
+			cache.append(i)
+
+		# when encountered with end of loop
+		# form corresponding key value pairs
+		# and clear cache
+		elif _ops[i] == _end and len(cache):
+			index_map[cache[-1]] = i 
+			del cache[-1]
+	
+	return index_map
+
+
+def run_fck(fname):
+	# extract instructions from file, clean 'em
+	instructions = cleansing_agent(list(str(files_got_content(fname))), [ ">", "<", "+", "-", ".", ",", "[", "]" ])
+	instr_ptr = 0
+
+	# Infinite memory cells and its cell pointer
+	memory = [0]
+	cell_ptr = 0
+
+	# loop locations
+	loops = build_index_map(instructions, "[", "]")
+	if not loops:
+		print("\nTraceback error:\n\t> Looks like you have a broken loop chain in u r source\n")
+		sys.exit(0)
+	loop_init = None
+
+
+	# execute instructions
+	while instr_ptr < len(instructions):
+		
+		# > move pointer to next memory cell
+		if instructions[instr_ptr] == ">":
+			memory.append(0)
+			cell_ptr += 1
+		
+		# < move pointer to last memory cell
+		elif instructions[instr_ptr] == "<":
+			if cell_ptr-1 >= 0:
+				cell_ptr -= 1
 			else:
-				# Invalid instruction error
-				print("Traceback Error: \n  >%s instruction does not exist \nin brainfuck!\n\n " % self.instructions[i])
+				print("\nTraceback error: \n\t> Instruction, address: %s, %d \n\t> Guess what, this version does \n\tnot support negative indexing(memory location)\n" %(instructions[instr_ptr], instr_ptr))
 				sys.exit(1)
-			
+		
+		# + increment byte at memory cell
+		elif instructions[instr_ptr] == "+":
+			if memory[cell_ptr]+1 <= 255:
+				memory[cell_ptr] += 1
+			else:
+				print("\nTraceback error: \n\t> Instruction, address: %s, %d \n\t> In 1byte unsigned max val. you can fit is from 0 to 255(256 in total), \n\tI think you should move to next memory cell\n" %(instructions[instr_ptr], instr_ptr))
+				sys.exit(1)
+		
+		# - decrement byte at memory cell
+		elif instructions[instr_ptr] == "-":
+			if memory[cell_ptr]-1 >= -255:
+				memory[cell_ptr] -= 1
+			else:
+				print("\nTraceback error: \n\t> Instruction, address: %s, %d \n\t> To complement unsigned byte, you can store max -255\n\tSo, maybe move to next cell or \n\tforget about brainfuck!\n" %(instructions[instr_ptr], instr_ptr))
+				sys.exit(0)
+		
+		# . output ascii(or unicode) encoded byte at memory cell
+		elif instructions[instr_ptr] == ".":
+			if memory[cell_ptr] >= 0:
+				print(memory[cell_ptr])
+				#sys.stdout.write(chr(memory[cell_ptr]))
+			else:
+				print(memory[cell_ptr])
+		
+		# , input byte and store it in memory cell
+		elif instructions[instr_ptr] == ",":
+			memory[cell_ptr] = int(input())
 
-			# Don't want an infinite loop do we??!!
-			i+= 1	
+		# [ move past corresponding ']' if byte at memory cell is 0(1> is true, 0 is false)
+		elif instructions[instr_ptr] == "[":
+			if memory[cell_ptr] == 0:
+				instr_ptr = loops[instr_ptr]   # -1 since +1 at end of loop
+			else: 
+				loop_init = instr_ptr
+		
+		# ] end of loop(while)	
+		elif instructions[instr_ptr] == "]":
+			instr_ptr = loop_init-1   # -1 since +1 at end of loop
 
 
-# Run interpreter
-# in terminal like following
-# user@user~$ python brainfuck.py filename.bf
+		# Don't want an infinite loop do we??!!
+		instr_ptr += 1
 
+
+# Run instructions
 if __name__ == "__main__":
-	BrainScrew(sys.argv[1]).run_fck()
+	run_fck(sys.argv[1])
