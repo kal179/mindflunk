@@ -7,7 +7,7 @@
 Brainfuck has 8 instructions, which are turing complete which basically means that   <br/>
 they can read-write-manipulate Long array(tape) of memory according to instructions   <br/>
 PLUS PLUS bf interpreter does not have any statements, clearly it's a plain turing language.   <br/>
-and my array is sort of infinite to the right(Turing Complete). 
+and my array is sort of infinite to the right(Turing Complete).   <br/>
 <br/>
 <b>For References Check out: </b>     <br/>
 http://www.muppetlabs.com/~breadbox/bf/   <br/>
