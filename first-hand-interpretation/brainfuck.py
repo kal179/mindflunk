@@ -109,10 +109,11 @@ def run_fck(fname):
 		# . output ascii(or unicode) encoded byte at memory cell
 		elif instructions[instr_ptr] == ".":
 			if memory[cell_ptr] >= 0:
-				print(memory[cell_ptr])
+				print(memory[cell_ptr])    # For Debugging
 				#sys.stdout.write(chr(memory[cell_ptr]))
 			else:
-				print(memory[cell_ptr])
+				print(memory[cell_ptr])     # For Debugging
+				#sys.stdout.write(str(memory[cell_ptr]))
 		
 		# , input byte and store it in memory cell
 		elif instructions[instr_ptr] == ",":
