@@ -1,4 +1,4 @@
-# brainscrewed-An-Brainfuck-Interpreter
+# brainscrewed-A-Brainfuck-Interpreter
 A simple Brainfuck interpreter implemented in two different ways.  <br/>
 
 <strong>Implementation </strong>  <br/>
@@ -29,4 +29,4 @@ And also b'cuz Brainfuck is easy to implement!     </i><br/>
 
 I'd Love to hear <b>edits, suggestions, and your   <br/>
 contribution</b>.  <br/>
-contact: kalpaktake@gmail.com
+
