@@ -1,24 +1,23 @@
-# mindflunk-A BrainFluck Interpreter
+# mindflunk - A BrainFluck Interpreter
 A simple Brainfluck interpreter implemented in two different ways.  <br/>
 
 <strong>Implementation </strong>  <br/>
 (1) Direct Interpreter  <i>(/master/first-hand-interpretation)</i>   <br/>
-(2) Bytecode Interpreter  <i>(dev in progress)</i>              <br/>
-<br/>
+(2) Bytecode Interpreter  <i>(dev in progress)</i>
 <br/>
 <strong>(1) Direct Interpretation  </strong>   <br/>
-Implementation of brainfluck in direct interpretation method, In which scripts are executed   <br/>
+Implementation of brainfluck in direct interpretation method, In which scripts are executed  
 with their native language, and not converted to any intermediate representation!  <br/>
-For e.g. Lisp, Scheme, etc!   <br/>
+For e.g. Lisp, Scheme, etc!
 <br/>
 <strong>(2) Bytecode Interpretation   </strong><br/>
-Implementation of brainfluck in which scripts are converted    <br/>
-to an intermediate language-representation and then executed    <br/>
-by dedicated VM(Virtual Machine)!     <br/>
+Implementation of brainfluck in which scripts are converted    
+to an intermediate language-representation and then executed   
+by dedicated VM(Virtual Machine)!     
 <br/>
-<i>I'm implementating interpreter    <br/>
-in two distinct ways, for learning purposes!    <br/>
-And also b'cuz Brainfluck is easy to implement!     </i><br/>
+<i>I'm implementating interpreter   
+in two distinct ways, for learning purposes!    
+And also b'cuz Brainfluck is easy to implement!     </i>
 <br/>
 <strong>Usage:</strong> <br/>
 <pre>
@@ -27,6 +26,5 @@ And also b'cuz Brainfluck is easy to implement!     </i><br/>
     
 </pre>
 
-I'd Love to hear <b>edits, suggestions, and your   <br/>
-contribution</b>.  <br/>
-
+I'd Love to hear edits, suggestions, and your contribution. <br/>
+<b>Note: Project no longer in development and will be available in archive mode only</b>
