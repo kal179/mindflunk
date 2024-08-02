@@ -1,4 +1,4 @@
-# brainscrewed-A BrainFluck Interpreter
+# mindflunk-A BrainFluck Interpreter
 A simple Brainfluck interpreter implemented in two different ways.  <br/>
 
 <strong>Implementation </strong>  <br/>
