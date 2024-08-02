@@ -21,7 +21,6 @@ by dedicated VM(Virtual Machine)!
 in two distinct ways, for learning purposes!    
 And also b'cuz Brainfluck is easy to implement!     </i>
 <br/>
-<br/>
 <strong>Usage:</strong> <br/>
 <pre>
     ~$ python first-hand-interpretation/mindflunk.py source.bf
