@@ -22,8 +22,8 @@ And also b'cuz Brainfluck is easy to implement!     </i><br/>
 <br/>
 <strong>Usage:</strong> <br/>
 <pre>
-    ~$ python first-hand-interpretation/brainf.py source.bf
-    ~$ python middle-man-interpretation/brainf.py source.bf
+    ~$ python first-hand-interpretation/mindflunk.py source.bf
+    ~$ python middle-man-interpretation/mindflunk.py source.bf
     
 </pre>
 
