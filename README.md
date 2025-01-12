@@ -1,5 +1,5 @@
-# mindflunk - A BrainFluck Interpreter
-A simple Brainfluck interpreter implemented in two different ways.  <br/>
+# mindflunk - A Brainfck Interpreter
+A simple Brainfck interpreter implemented in two different ways.  <br/>
 
 <strong>Implementation </strong>  <br/>
 (1) Direct Interpreter  <i>(/master/first-hand-interpretation)</i>   <br/>
